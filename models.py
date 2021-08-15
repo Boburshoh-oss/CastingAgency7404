@@ -4,11 +4,13 @@ from flask_sqlalchemy import SQLAlchemy
 import json
 from config import database_param
 
-database_path = "{}://{}:{}@localhost: 5432/{}".format(
-                                   database_param["dialect"],
-                                   database_param["username"],
-                                   database_param["password"],
-                                   database_param["db_name"])
+
+database_path=os.environ["DATABASE_URL"]
+# database_path = "{}://{}:{}@localhost: 5432/{}".format(
+#                                    database_param["dialect"],
+#                                    database_param["username"],
+#                                    database_param["password"],
+#                                    database_param["db_name"])
 
 db = SQLAlchemy()
 
