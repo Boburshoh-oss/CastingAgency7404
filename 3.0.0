@@ -1,0 +1,5 @@
+Requirement already satisfied: python-jose in e:\official c disc\beck-end vazifa\flask\proekt 5\starter\env\lib\site-packages (3.3.0)
+Requirement already satisfied: rsa in e:\official c disc\beck-end vazifa\flask\proekt 5\starter\env\lib\site-packages (from python-jose) (4.7.2)
+Requirement already satisfied: pyasn1 in e:\official c disc\beck-end vazifa\flask\proekt 5\starter\env\lib\site-packages (from python-jose) (0.4.8)
+Requirement already satisfied: ecdsa!=0.15 in e:\official c disc\beck-end vazifa\flask\proekt 5\starter\env\lib\site-packages (from python-jose) (0.17.0)
+Requirement already satisfied: six>=1.9.0 in e:\official c disc\beck-end vazifa\flask\proekt 5\starter\env\lib\site-packages (from ecdsa!=0.15->python-jose) (1.16.0)
