@@ -1,13 +1,16 @@
-import os
+from os import getenv
 from sqlalchemy import Column, String, Integer, create_engine, Date
 from flask_sqlalchemy import SQLAlchemy
 import json
 from config import database_param
+from os import getenv
 
 
 
 
-database_path=os.environ["DATABASE_URL"]
+database_path=getenv("DATABASE_URI")
+
+
 # database_path = "{}://{}:{}@localhost: 5432/{}".format(
 #                                    database_param["dialect"],
 #                                    database_param["username"],
