@@ -239,6 +239,24 @@ def create_app(test_config=None):
             404,
         )
 
+    @app.errorhandler(405)
+    def method_not_allowed(error):
+        return jsonify({
+                "success": False,
+                "error": 405,
+                "message": "Method Not Allowed"
+            }),405
+        
+    @app.errorhandler(403)
+    def foribdden(error):
+        return jsonify({
+                "success": False,
+                "error": 403,
+                "message": "Foribdden"
+            }),403
+            
+        
+
     @app.errorhandler(422)
     def unprocessable(error):
         return jsonify({
