@@ -43,23 +43,27 @@ Note: you can create a db named `capstone` by using `createdb` command as shown 
 
 **Permissions**:
   ```code
-    - Assitant:
-        - `view:genres`
-        - `view:actors`
-        - `view:movies`
-    - Director:
+    - casting_assistant:
+        - `get:actors`
+        - `get:movies`
+    - casting_director:
         - All permissions of assistant
-        -  `add:actors`
+        -  `create:actors`
         -  `delete:actors`
-        -  `patch:actors`
-        -  `patch:actors`
-        -  `patch:actors`
-    - Executive Producer:
+        -  `get:actors`
+        -  `get:movies`
+        -  `update:actors`
+        -  `update:movies`
+    - executive_producer:
         - All permissions of director
-        - `add:genres`
-        - `add:movies`
-        - `delete:genres`
+        - `create:actors`
+        - `create:movies`
+        - `delete:actors`
         - `delete:movies`
+        - `get:actors`
+        - `get:movies`
+        - `update:actors`
+        - `update:movies`
   ```
 
   **To testing API, I`ve prepared three accounts**:
@@ -70,11 +74,11 @@ Note: you can create a db named `capstone` by using `createdb` command as shown 
         - **email**: muvaffaqiyat12@mail.ru
     - Executive Producer:
         - **email**: intelligent_7404@gmail.ru
-    - Password🔑:
+    - Password:
         - **Boburshoh777!**
   ```
 
-## Login🔐 to accounts*:
+## Login to accounts*:
 ### To `login/signup` you should go to the page: [login/signup](https://capstone-7404.us.auth0.com/authorize?
 
 ### After `login/signup` get token from url, this token is used to send requests to API endpoints
@@ -82,13 +86,13 @@ Note: you can create a db named `capstone` by using `createdb` command as shown 
 ### To logout, naviagte to page: https://capstone-7404.us.auth0.com/logout
 
 # Testing
-* ⚠ First of all ran all commands in Run application section!
-* ⚠ Firstly you should create database for API testing and change database_path on ` test_app.py ` file, and setup environment variables
+* First of all ran all commands in Run application section!
+* Firstly you should create database for API testing and change database_path on ` test_app.py ` file, and setup environment variables
 
 ## First method: unittest
 1. **Run the following comands:**
 ```bash
-        python3 manage.py runtests
+        python test_app.py
 ```
 
 ## Endpoints
@@ -126,7 +130,7 @@ POST '/movies'
 - Creates a new movie with the provided parameters
 - Request Arguments: None
 - Allowed users: Executive Producer
-- Required permission (add:movies)
+- Required permission (create:movies)
 - Request Body: {
 	"title": "Slap of the Century"
 	"release_date": "2/26/1996"
@@ -147,7 +151,7 @@ PATCH '/movies/<id>'
 - Updates a specific movie with the provided parameters
 - Request Arguments: movie_id (The ID of the movie to update)
 - Allowed users: Executive Producer, Casting Director
-- Required permission (edit:movies)
+- Required permission (update:movies)
 - Request Body: {
 	"title": "Silicon Valley"
 }
@@ -166,7 +170,7 @@ DELETE '/movies/<id>'
 - Deletes a specific movie
 - Request Arguments: movie_id (The ID of the movie to delete)
 - Allowed users: Executive Producer
-- Required permission (delete:movie)
+- Required permission (delete:movies)
 - Response
 {
   "delete": id,
@@ -210,7 +214,7 @@ POST '/actors'
 - Creates a new actor with the provided parameters
 - Request Arguments: None
 - Allowed users: Executive Producer and casting Director
-- Required permission (add:actors)
+- Required permission (create:actors)
 - Request Body: {
 	"name": "Kunle Afolayan",
 	"age": 20,
@@ -233,7 +237,7 @@ PATCH '/actors/<id>'
 - Updates a specific actor with the provided parameters
 - Request Arguments: actor_id (The ID of the actor to update)
 - Allowed users: Executive Producer and Casting Director
-- Required permission (edit:actor)
+- Required permission (update:actors)
 - Request Body: {
 	"name": "RMD",
 }
