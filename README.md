@@ -20,7 +20,7 @@ This project is based on `Python 3` and `Flask`.
 To install project dependencies:
 
 ```bash
-$ pip install -r requirements.txt
+$ pip3 install -r requirements.txt
 ```
 
 Note: you must have the latest version of Python 3
@@ -90,9 +90,16 @@ Note: you can create a db named `capstone` by using `createdb` command as shown 
 * First of all ran all commands in Run application section!
 * Firstly you should create database for API testing and change database_path on ` test_app.py ` file, and setup environment variables
 
+##Run app
+```bash
+    source setup.sh
+    python3 app.py
+```
+
 ## First method: unittest
 1. **Run the following comands:**
 ```bash
+        source setup.sh
         python test_app.py
 ```
 

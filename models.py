@@ -6,16 +6,13 @@ from config import database_param
 from os import getenv
 
 
+# database_path = getenv("DATABASE_URI")
 
-
-database_path=getenv("DATABASE_URI")
-
-
-# database_path = "{}://{}:{}@localhost: 5432/{}".format(
-#                                    database_param["dialect"],
-#                                    database_param["username"],
-#                                    database_param["password"],
-#                                    database_param["db_name"])
+database_path = "{}://{}:{}@localhost: 5432/{}".format(
+    database_param["dialect"],
+    database_param["username"],
+    database_param["password"],
+    database_param["db_name"])
 
 db = SQLAlchemy()
 
@@ -23,6 +20,8 @@ db = SQLAlchemy()
 setup_db(app)
     binds a flask application and a SQLAlchemy service
 '''
+
+
 def setup_db(app, database_path=database_path):
     app.config["SQLALCHEMY_DATABASE_URI"] = database_path
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
@@ -31,19 +30,17 @@ def setup_db(app, database_path=database_path):
     db.create_all()
 
 
-
 class Movie(db.Model):
     __tablename__ = 'movies'
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String)
     release_date = db.Column(Date, nullable=False)
-    actors = db.relationship('Actor', cascade="all, delete",backref='movies')
+    actors = db.relationship('Actor', cascade="all, delete", backref='movies')
 
     def __init__(self, title, release_date):
         self.title = title
         self.release_date = release_date
-
 
     def insert(self):
         db.session.add(self)
@@ -52,7 +49,6 @@ class Movie(db.Model):
     def delete(self):
         db.session.delete(self)
         db.session.commit()
-
 
     def update(self):
         db.session.commit()
@@ -63,6 +59,7 @@ class Movie(db.Model):
             'title': self.title,
             'release_date': self.release_date,
             'actors': [actor.name for actor in self.actors]}
+
 
 class Actor(db.Model):
     __tablename__ = 'Actors'

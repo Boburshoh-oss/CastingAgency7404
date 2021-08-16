@@ -1,3 +1,4 @@
+import os
 from functools import wraps
 from urllib.request import urlopen
 from flask import request
@@ -5,13 +6,14 @@ import json
 from jose import jwt
 
 
-AUTH0_DOMAIN = 'capstone-7404.us.auth0.com'
-ALGORITHMS = ['RS256']
-API_AUDIENCE = 'capstone-api'
+AUTH0_DOMAIN = os.environ.get('AUTH0_DOMAIN')
+ALGORITHMS = os.environ.get('ALGORITHMS')
+API_AUDIENCE = os.environ.get('API_AUDIENCE')
 
 
 class AuthError(Exception):
     """A standardized way to communicate auth failures"""
+
     def __init__(self, error, status_code):
         self.error = error
         self.status_code = status_code
@@ -85,7 +87,8 @@ def verify_decode_jwt(token):
         except jwt.JWTClaimsError:
             raise AuthError({
                 'code': 'invalid_claims',
-                'description': 'Incorrect claims. Please, check the audience and issuer.'
+                'description': 'Incorrect claims. Please, \
+                    check the audience and issuer.'
             }, 401)
         except Exception:
             raise AuthError({
@@ -118,9 +121,13 @@ def requires_auth(permission=''):
         @wraps(f)
         def wrapper(*args, **kwargs):
             """
-            ensures request has Authorization header with bearer token
-            verifies the given token and checks the permissions embedded within it
-            appropriate exceptions are raised if any step fails, else, access is granted
+            ensures request has Authorization header with
+            bearer token
+            verifies the given token and checks 
+            the permissions 
+            embedded within it
+            appropriate exceptions are raised if any step 
+            fails, else, access is granted
             """
             token = get_token_auth_header()
             payload = verify_decode_jwt(token)
