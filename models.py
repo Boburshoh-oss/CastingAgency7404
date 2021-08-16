@@ -6,13 +6,13 @@ from config import database_param
 from os import getenv
 
 
-# database_path = getenv("DATABASE_URI")
+database_path = getenv("DATABASE_URI")
 
-database_path = "{}://{}:{}@localhost: 5432/{}".format(
-    database_param["dialect"],
-    database_param["username"],
-    database_param["password"],
-    database_param["db_name"])
+# database_path = "{}://{}:{}@localhost: 5432/{}".format(
+#     database_param["dialect"],
+#     database_param["username"],
+#     database_param["password"],
+#     database_param["db_name"])
 
 db = SQLAlchemy()
 
